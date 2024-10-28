@@ -4,31 +4,7 @@ use waterflow::pipeline::Pipeline;
 use waterflow::pipeline_tree::PipelineTree;
 
 #[test]
-#[ignore = "This needs to have the wasm_example built"]
-pub fn test_execute_pipeline() {
-    let mut pipeline = generate_simple_pipeline();
-
-    smol::block_on(async { pipeline.execute().await })
-        .expect("Something went wrong while trying to run the pipeline!");
-
-    dbg!(&pipeline);
-
-    let all_succeeded = pipeline
-        .get_job_statuses()
-        .iter()
-        .all(|(_, status)| status.is_succeeded());
-
-    assert!(all_succeeded)
-}
-
-#[test]
 pub fn test_print_pipeline_dep_tree() {
-    let pipeline = generate_simple_pipeline();
-
-    dbg!(PipelineTree::new(&pipeline));
-}
-
-fn generate_simple_pipeline() -> Pipeline {
     let mut pipeline = Pipeline::new();
 
     let file_name = "tests/wasm_example/pkg/wasm_example_bg.wasm";
@@ -52,7 +28,7 @@ fn generate_simple_pipeline() -> Pipeline {
 
     pipeline.add_jobs(vec![job1, job2, job3, job4]);
 
-    pipeline
+    dbg!(PipelineTree::new(&pipeline));
 }
 
 #[test]

@@ -140,3 +140,53 @@ pub fn test_pipeline_execution() {
     assert_eq!(job3.input, ["Hello", "World!"]);
     assert_eq!(job3.output, "Hello World!");
 }
+
+#[test]
+#[ignore = "This needs to have the wasm_example built"]
+pub fn test_execute_pipeline() {
+    use crate::job_type::JobType;
+
+    let mut pipeline = Pipeline::new();
+
+    let file_name = "tests/wasm_example/pkg/wasm_example_bg.wasm";
+
+    let job1 = Job::new(
+        "First hello world",
+        JobType::new_bash("echo -n 'Hello World! #1'"),
+    );
+    let job2 = Job::new(
+        "Second hello world",
+        JobType::new_bash("echo -n 'Hello World! #2'"),
+    );
+
+    let mut job3 = Job::new("Reverse join", JobType::new_wasm("reverse_join", file_name));
+    job3.add_dependency(job1.get_id());
+    job3.add_dependency(job2.get_id());
+
+    let mut job4 = Job::new("Normal join", JobType::new_wasm("normal_join", file_name));
+    job4.add_dependency(job1.get_id());
+    job4.add_dependency(job2.get_id());
+
+    let job3_id = job3.get_id();
+    let job4_id = job4.get_id();
+
+    pipeline.add_jobs(vec![job2, job1, job3, job4]);
+
+    smol::block_on(async { pipeline.execute().await })
+        .expect("Something went wrong while trying to run the pipeline!");
+
+    dbg!(&pipeline);
+
+    let all_succeeded = pipeline
+        .get_job_statuses()
+        .iter()
+        .all(|(_, status)| status.is_succeeded());
+
+    let job3 = pipeline.get_job(job3_id);
+    let job4 = pipeline.get_job(job4_id);
+
+    assert_eq!(job3.output, "Hello World! #2, Hello World! #1");
+    assert_eq!(job4.output, "Hello World! #1, Hello World! #2");
+
+    assert!(all_succeeded)
+}
