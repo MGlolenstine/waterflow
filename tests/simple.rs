@@ -4,6 +4,7 @@ use waterflow::pipeline::Pipeline;
 use waterflow::pipeline_tree::PipelineTree;
 
 #[test]
+#[ignore = "This needs to have the wasm_example built"]
 pub fn test_execute_pipeline() {
     let mut pipeline = generate_simple_pipeline();
 
@@ -55,8 +56,7 @@ fn generate_simple_pipeline() -> Pipeline {
 }
 
 #[test]
-#[ignore]
-/// For this test to pass, you need to have the `jq` available on the system and a working network connection
+#[ignore = "For this test to pass, you need to have the `jq` available on the system and a working network connection"]
 pub fn test_io() {
     tracing_subscriber::fmt::init();
     let mut pipeline = Pipeline::new();
