@@ -1,0 +1,29 @@
+[package]
+name = "waterflow"
+version = "0.1.0"
+edition = "2021"
+
+# [workspace]
+# members = [
+#     "tests/wasm_example",
+# ]
+
+[dependencies]
+bypar = { git = "https://gitlab.mglolenstine.xyz/MGlolenstine/bypar.git", branch = "traits", version = "0.1.0", features = ["full"] }
+bypar_derive = { git = "https://gitlab.mglolenstine.xyz/MGlolenstine/bypar_derive.git", branch = "switch_to_traits", version = "0.1.0", features = ["full"] }
+flume = "0.11.1"
+snafu = "0.8.5"
+tracing = "0.1.40"
+ureq = { version = "2.10.1", optional = true }
+uuid = { version = "1.11.0", features = ["v4", "fast-rng"] }
+wasmtime = { version = "26.0.0", optional = true }
+wasmtime-wasi = { version = "26.0.0", optional = true }
+
+[dev-dependencies]
+smol = "2.0.2"
+tracing-subscriber = "0.3.18"
+
+[features]
+default = ["web", "wasm"]
+web = ["dep:ureq"]
+wasm = ["dep:wasmtime", "dep:wasmtime-wasi"]
