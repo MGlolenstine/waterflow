@@ -103,6 +103,8 @@ impl Pipeline {
 
 #[test]
 pub fn test_pipeline_execution() {
+    tracing_subscriber::fmt::init();
+
     use crate::job_type::JobType;
     let job1 = Job::new("Test job Hello", JobType::new_bash("echo -n 'Hello'"));
     let job2 = Job::new("Test job World", JobType::new_bash("echo -n 'World!'"));

@@ -30,7 +30,7 @@ pub fn test_print_pipeline_dep_tree() {
 fn generate_simple_pipeline() -> Pipeline {
     let mut pipeline = Pipeline::new();
 
-    let file_name = "tests/wasm_example/target/wasm32-unknown-unknown/debug/wasm_example.wasm";
+    let file_name = "tests/wasm_example/pkg/wasm_example_bg.wasm";
 
     let job1 = Job::new(
         "First hello world",

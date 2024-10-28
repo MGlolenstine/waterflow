@@ -1,4 +1,6 @@
 /target
+/waterflow_bindings/target
+/waterflow_plugin_interface/target
 /tests/wasm_example/target
 /.direnv
 
