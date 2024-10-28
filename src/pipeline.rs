@@ -142,6 +142,7 @@ pub fn test_pipeline_execution() {
 }
 
 #[test]
+#[cfg(feature = "wasm")]
 #[ignore = "This needs to have the wasm_example built"]
 pub fn test_execute_pipeline() {
     use crate::job_type::JobType;

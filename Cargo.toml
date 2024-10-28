@@ -19,7 +19,7 @@ tracing = "0.1.40"
 ureq = { version = "2.10.1", optional = true }
 uuid = { version = "1.11.0", features = ["v4", "fast-rng"] }
 wasmtime = { version = "26.0.0", optional = true }
-waterflow_plugin_interface = { path = "waterflow_plugin_interface" }
+waterflow_plugin_interface = { path = "waterflow_plugin_interface", optional = true }
 
 [dev-dependencies]
 smol = "2.0.2"
@@ -28,4 +28,4 @@ tracing-subscriber = "0.3.18"
 [features]
 default = ["web", "wasm"]
 web = ["dep:ureq"]
-wasm = ["dep:wasmtime"]
+wasm = ["dep:wasmtime", "dep:waterflow_plugin_interface"]

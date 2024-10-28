@@ -1,10 +1,11 @@
-use waterflow::job::Job;
-use waterflow::job_type::JobType;
-use waterflow::pipeline::Pipeline;
-use waterflow::pipeline_tree::PipelineTree;
-
 #[test]
+#[cfg(feature = "wasm")]
 pub fn test_print_pipeline_dep_tree() {
+    use waterflow::job::Job;
+    use waterflow::job_type::JobType;
+    use waterflow::pipeline::Pipeline;
+    use waterflow::pipeline_tree::PipelineTree;
+
     let mut pipeline = Pipeline::new();
 
     let file_name = "tests/wasm_example/pkg/wasm_example_bg.wasm";
@@ -32,8 +33,13 @@ pub fn test_print_pipeline_dep_tree() {
 }
 
 #[test]
+#[cfg(feature = "web")]
 #[ignore = "For this test to pass, you need to have the `jq` available on the system and a working network connection"]
 pub fn test_io() {
+    use waterflow::job::Job;
+    use waterflow::job_type::JobType;
+    use waterflow::pipeline::Pipeline;
+
     tracing_subscriber::fmt::init();
     let mut pipeline = Pipeline::new();
 
