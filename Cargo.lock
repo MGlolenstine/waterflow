@@ -2084,12 +2084,9 @@ dependencies = [
 name = "waterflow_bindings"
 version = "0.1.0"
 dependencies = [
- "bypar",
- "bypar_derive",
  "proc-macro2",
  "quote",
  "syn 1.0.109",
- "waterflow_plugin_interface",
 ]
 
 [[package]]

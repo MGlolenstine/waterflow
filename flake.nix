@@ -25,6 +25,7 @@
             openssl
             jq
             lld
+            wasm-pack
           ];
           RUST_SRC_PATH = rustPlatform.rustLibSrc;
         };

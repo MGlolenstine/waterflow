@@ -7,9 +7,6 @@ edition = "2021"
 proc-macro = true
 
 [dependencies]
-bypar = { git = "https://gitlab.mglolenstine.xyz/MGlolenstine/bypar.git", branch = "traits", version = "0.1.0", features = ["full"] }
-bypar_derive = { git = "https://gitlab.mglolenstine.xyz/MGlolenstine/bypar_derive.git", branch = "switch_to_traits", version = "0.1.0", features = ["full"] }
 proc-macro2 = "1.0"
 quote = "1.0"
-syn = "1.0"
-waterflow_plugin_interface = { path = "../waterflow_plugin_interface" }
+syn = { version = "1.0", features = ["full"] }

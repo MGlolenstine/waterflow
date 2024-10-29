@@ -1,11 +1,6 @@
-use bypar::ToBytes as _;
-use bypar::{
-    prelude::{IntoSizedString, SizedString, SizedVec},
-    FromBytes as _,
-};
-use bypar_derive::{FromBytes, ToBytes};
 use wasm_bindgen::prelude::*;
-use waterflow_plugin_interface::Communication;
+use waterflow_bindings::waterflow_binding;
+use waterflow_plugin_interface::prelude::*;
 
 #[waterflow_binding]
 pub fn reverse_join(input: Vec<String>) -> String {
